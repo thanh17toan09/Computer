@@ -1,0 +1,166 @@
+﻿@model ElectroShop.Models.MUser
+
+@{
+    ViewBag.Title = "Chỉnh sửa: " + Model.Fullname;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    .input {
+        width: 556px;
+    }
+
+    .select {
+        width: 280px;
+    }
+</style>
+@Html.Partial("_MessageAlert")
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+                    <li class="active">
+                        <a href="@Url.Action("Create", "User")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Index", "User")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "User")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.demrac)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Danh mục User</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="btn-group">
+                                        <input type="submit" value="Save" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                        <a href="@Url.Action("Index","User")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                    </div>
+                                </div>
+                                <div class="table-toolbar">
+                                    <div class="span8">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.ID)
+                                        @Html.HiddenFor(model => model.Image)
+                                        @Html.HiddenFor(model => model.Created_at)
+                                        @Html.HiddenFor(model => model.Created_by)
+
+                                        <div class="form-group">
+                                            <label>Tên User</label>
+                                            @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tên truy cập</label>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ</label>
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input", placeholder = "Mật khẩu", type = "password" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Nhập lại mật khẩu", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input", placeholder = "Mật khẩu", type = "password" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        @*bên phải*@
+                                        <div class="form-group">
+                                            <label>Ảnh</label>
+                                            <img src="~/Public/library/user/@Model.Image" alt="Alternate Text" width="100" class="d-block mx-auto" />
+                                            <input type="file" name="Img" class="form-control" />
+
+                                            @Html.ValidationMessage("hinhanh", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Trạng thái</label>
+                                            <select class="form-control" name="Status">
+                                                <option value="1">Hiện</option>
+                                                <option value="2">Ẩn</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số điện thoại</label>
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "text-danger" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quyền truy cập</label>
+                                            <select class="form-control" name="Access">
+                                                <option value="0">User</option>
+                                                <option value="1">Quản trị</option>
+                                                <option value="2">Quản trị Lv1</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Access, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giới tính</label>
+                                            <select class="form-control" name="Gender">
+                                                <option value="0">Nam</option>
+                                                <option value="1">Nữ</option>
+                                                <option value="2">Khác</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

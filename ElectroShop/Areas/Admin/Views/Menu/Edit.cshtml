@@ -1,0 +1,120 @@
+﻿@model ElectroShop.Models.MMenu
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .input {
+        width: 556px;
+    }
+
+    .select {
+        width: 280px;
+    }
+</style>
+@using (Html.BeginForm("Edit", "Menu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+                    <li class="">
+                        <a href="@Url.Action("Index", "Menu")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "Menu")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.demrac)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Menu</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- block -->
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="btn-group">
+                                        <input type="submit" value="Save" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                        <a href="@Url.Action("Index","Menu")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                    </div>
+                                </div>
+                                <div class="table-toolbar">
+                                    <div class="span8">
+                                        <div class="form-horizontal">
+
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(model => model.Id)
+                                            @Html.HiddenFor(model => model.Created_at)
+                                            @Html.HiddenFor(model => model.Created_by)
+                                            @Html.HiddenFor(model => model.Type)
+                                            @Html.HiddenFor(model => model.TableId)
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">Tên menu</label>
+                                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">Link</label>
+                                                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        @*bên phải*@
+                                        <div class="form-group">
+                                            <label class="control-label col-md-10">Cấp cha</label>
+                                            @Html.DropDownListFor(model => model.ParentId, (SelectList)ViewBag.parentMenu, "[Là cấp cha]", new { @class = "form-control" })
+                                            @*@Html.DropDownListFor(model => model.ParentID, SelectList, new { @class = "form-control" })*@
+                                            @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Vị trí hiển thị", htmlAttributes: new { @class = "control-label " })
+                                            <div class="">
+                                                @Html.DropDownListFor(model => model.Position, new[] { new SelectListItem { Value = "header", Text = "Header" }, new SelectListItem { Value = "footer", Text = "Footer" }, new SelectListItem { Value = "mainmenu", Text = "MainMenu" } }, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label " })
+                                            <div class="">
+                                                @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Value = "1", Text = "Hiển thị" }, new SelectListItem { Value = "2", Text = "Không hiển thị" } }, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

@@ -1,0 +1,174 @@
+﻿@model ElectroShop.Models.MProduct
+
+@{
+    ViewBag.Title = "Chỉnh sửa sản phẩm: " + @Model.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .input {
+        width: 586px;
+    }
+
+    .select {
+        width: 280px;
+    }
+</style>
+@Html.Partial("_MessageAlert")
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+                    <li class="">
+                        <a href="@Url.Action("Index", "Product")"> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "Product")"> Thùng rác(@ViewBag.countTrash)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Danh mục sản phẩm</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- block -->
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="btn-group">
+                                        <input type="submit" value="Save" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                        <a href="@Url.Action("Index","Product")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                    </div>
+                                </div>
+                                <div class="table-toolbar">
+                                    <div class="span8">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.ID)
+                                        @Html.HiddenFor(model => model.Status)
+                                        @Html.HiddenFor(model => model.Discount)
+                                        @Html.HiddenFor(model => model.Image)
+                                        @Html.HiddenFor(model => model.Created_at)
+                                        @Html.HiddenFor(model => model.Created_by)
+
+                                        <div class="form-group">
+                                            <label>Tên sản phẩm</label>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Thông tin khuyến mại", htmlAttributes: new { @class = "control-label" })
+                                            <div class="">
+
+                                                @Html.TextAreaFor(model => model.NewPromotion, new { @class = "input", @rows = 5 })
+                                                @Html.ValidationMessageFor(model => model.NewPromotion, "", new { @class = "text-danger" })
+                                                <i class="text-danger"><strong>* </strong>Vui lòng xuống dòng cho mỗi khuyến mại</i>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Chi tiết sản phẩm</label>
+                                            @Html.TextAreaFor(model => model.Detail, new { @class = "ckeditor", @id = "ckeditors" })
+                                            @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mô tả sản phẩm</label>
+                                            @Html.TextAreaFor(model => model.Description, new { @class = "ckeditor", @id = "ckeditorss" })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Thông số kỹ thuật</label>
+                                            @Html.TextAreaFor(model => model.Specification, new { @class = "ckeditor", @id = "ckeditorss" })
+                                            @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        @*bên phải*@
+                                        <div class="form-group">
+                                            <label>Loại sản phẩm</label>
+                                            @Html.DropDownListFor(model => model.CateID, (SelectList)ViewBag.ListCat, "[Chọn loại sản phẩm]", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Từ khóa</label>
+                                            @Html.TextAreaFor(model => model.MetaKey, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.MetaKey, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mô tả [SEO]</label>
+                                            @Html.TextAreaFor(model => model.MetaDesc, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.MetaDesc, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số lượng</label>
+                                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Giá</label>
+                                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Giá khuyến mãi</label>
+                                            @Html.EditorFor(model => model.ProPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ProPrice, "", new { @class = "text-danger" })
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Ảnh</label>
+                                            <img src="~/Public/library/Product/@Model.Image" alt="Alternate Text" width="100" class="d-block mx-auto" />
+                                            <input type="file" name="Img" class="form-control" />
+
+                                            @Html.ValidationMessage("hinhanh", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Trạng thái</label>
+                                            @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Text = "Xuất bản", Value = "1" }, new SelectListItem { Text = "Chưa xuất bản", Value = "2" } }, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Khuyến mãi</label>
+                                            <select class="form-control" name="Discount">
+                                                <option value="1">Hiện</option>
+                                                <option value="2">Ẩn</option>
+
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ElectroShop.Models.MCategory>
+<ul class="footer-links">
+    @foreach (var item in Model)
+    {
+        <li><a href="~/@item.Slug">@item.Name</a></li>
+    }
+    <li><a href="~/san-pham">Tất cả sản phẩm</a></li>
+</ul>

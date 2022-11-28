@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ElectroShop.Models.MCategory>
+    <div class="checkbox-filter">
+
+        @foreach (var row in Model)
+        {
+            <div class="input-checkbox">
+                <input type="checkbox" id="category-1">
+                <label for="category-1">
+                    <span></span>
+                    <a href="@row.Slug" title="">@row.Name</a>
+
+                </label>
+            </div>
+        }
+            <div class="input-checkbox">
+                <input type="checkbox" id="category-1">
+                <label for="category-1">
+                    <span></span>
+                    <a href="~/san-pham" title="">Tất cả sản phẩm</a>
+
+                </label>
+            </div>
+        </div>

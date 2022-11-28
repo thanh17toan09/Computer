@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ElectroShop.Models.MSlider>
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- shop -->
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 col-xs-6">
+                    <div class="shop">
+                        <div class="shop-img">
+                            <img src="~/Public/library/slider/@item.Img" alt="">
+                        </div>
+                        <div class="shop-body">
+                            <h3>@item.Name<br></h3>
+                            <a href="~/san-pham" class="cta-btn">Xem ngay <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /shop -->
+            }
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

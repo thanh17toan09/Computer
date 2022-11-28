@@ -1,0 +1,166 @@
+﻿@model ElectroShop.Models.MUser
+
+@{
+    ViewBag.Title = "Tạo mới người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .input {
+        width: 556px;
+    }
+
+    .select {
+        width: 280px;
+    }
+</style>
+@Html.Partial("_MessageAlert")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <li class="active">
+                        <a href="@Url.Action("Create", "User")"><i class="icon-chevron-right"></i> Thêm mới</a>
+
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Index", "User")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "User")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.demrac)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Người dùng</a>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- block -->
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="span10"></div>
+                                    <div class="span2">
+                                        <div class="btn-group">
+                                            <input type="submit" value="Create" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                            <a href="@Url.Action("Index","User")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-toolbar">
+                                    <div class="span8">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.Label("Họ tên ", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "input", placeholder = "Họ tên" } })
+                                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Tên truy cập ", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "input", placeholder = "Họ tên" } })
+                                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Địa chỉ ", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "input", placeholder = "Địa chỉ" } })
+                                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Mật khẩu", htmlAttributes: new { @class = "select" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input", placeholder = "Mật khẩu", type = "password" } })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "select" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Nhập lại mật khẩu", htmlAttributes: new { @class = "select" })
+                                            <div class="">
+                                                @Html.Editor("RePassword", new { htmlAttributes = new { @class = "input", placeholder = "Nhập lại mật khẩu", type = "password" } })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", placeholder = "Email" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Số điện thoại", htmlAttributes: new { @class = "control-label col-12", type = "number" })
+                                            <div class="">
+                                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", placeholder = "Số điện thoại" } })
+                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="span4">
+                                        @*bên phải*@
+                                        
+                                        <div class="form-group">
+                                            @Html.Label("Ảnh đại diện", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.TextBoxFor(model => model.Image, new { type = "file", @class = "select" })
+                                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Xét quyền", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.DropDownListFor(model => model.Access, new[] { new SelectListItem { Value = "0", Text = "Customer" }, new SelectListItem { Value = "1", Text = "Administrator" } }, new { @class = "select" })
+                                                @Html.ValidationMessageFor(model => model.Access, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Giới tính", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.DropDownListFor(model => model.Gender, new[] { new SelectListItem { Value = "1", Text = "Nam" }, new SelectListItem { Value = "2", Text = "Nữ" }, new SelectListItem { Value = "3", Text = "Khác" } }, new { @class = "select" })
+                                                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label col-12" })
+                                            <div class="">
+                                                @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Value = "1", Text = "Hoạt động" }, new SelectListItem { Value = "2", Text = "Chưa hoạt động" } }, new { @class = "select" })
+                                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

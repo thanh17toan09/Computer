@@ -1,0 +1,107 @@
+﻿@model ElectroShop.Models.MContact
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+
+                    <li class="">
+                        <a href="@Url.Action("Index", "Contact")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "Contact")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.count_trash)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Liên hệ</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- block -->
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="btn-group">
+                                        <input type="submit" value="Delete" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                        <a href="@Url.Action("Index","Contact")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-hover">
+
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Id)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Id)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.FullName)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.FullName)</td>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Email)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Email)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Phone)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Phone)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Title)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Detail)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Detail)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> Trạng thái</th>
+                                        <td scope="col"> @(Model.Flag == 1 ? "Đã trả lời":"Chưa trả lời") </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Created_at)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Created_at)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Updated_at)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Updated_at)</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col"> @Html.DisplayNameFor(model => model.Updated_by)</th>
+                                        <td scope="col">  @Html.DisplayFor(model => model.Updated_by)</td>
+                                    </tr>
+
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

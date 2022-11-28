@@ -1,0 +1,84 @@
+﻿
+<footer id="footer">
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Về chúng tôi</h3>
+                        <ul class="footer-links">
+                            @Html.Action("PListPage", "Module")
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Danh mục sản phẩm</h3>
+                        @Html.Action("PListCate", "Module")
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Tài khoản</h3>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="#" type="button" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                   data-whatever="getbootstrap" data-backdrop="static" data-keyboard="false">Đăng nhập</a>
+                            </li>
+                            <li>
+                                <a href="#" type="button" data-toggle="modal" data-target="#exampleModal" data-backdrop="static"
+                                   data-keyboard="false">Đăng ký</a>
+                            </li>
+                            <li><a href="#">Quên mật khẩu</a></li>
+                            <li><a href="#">Theo dõi đơn hàng</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">FANPAGE</h3>
+                        <div class="fb-page" data-href="https://www.facebook.com/ptt170901" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/ptt170901" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ptt170901">Shop ET</a></blockquote></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    @*<ul class="footer-payments">
+            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+            <li><a href="https://www.paypal.com/vn/signin"><i class="fa fa-cc-paypal"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+        </ul>*@
+                    <span class="copyright">
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved
+                    </span>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>

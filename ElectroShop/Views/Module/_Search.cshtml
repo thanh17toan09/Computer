@@ -1,0 +1,16 @@
+﻿
+
+<div class="header-search">
+    @using (Html.BeginForm("Search", "Site", FormMethod.Get, new { @class = "" }))
+    {
+    <select class="input-select">
+        <option value="0">Danh mục</option>
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id" style="font-size:8px;">@*@item.Name*@</option>
+        }
+        </select>
+    <input class="input" type="text" placeholder="Nhập tên sản phẩm..." name="key" value="@(Session["keywords"] ?? "")">
+        <button class="search-btn" value="Search" name="s" type="submit">Tìm kiếm</button>
+    }
+    </div>

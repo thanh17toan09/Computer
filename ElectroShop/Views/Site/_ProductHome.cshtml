@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ElectroShop.Models.MProduct>
+@foreach (var item in Model)
+{
+    <!-- product -->
+    <div class="product">
+        <div class="product-img">
+            <img src="~/Public/library/product/@item.Image" alt="@item.Name">
+            <div class="product-label">
+                <span class="sale">-@String.Format("{0:0}", ((item.Price - item.ProPrice) / item.Price * 100))%</span>
+               
+                <span class="new">NEW</span>
+            </div>
+        </div>
+        <div class="product-body">
+            @*<p class="product-category">@item.CateID</p>*@
+            <h3 class="product-name"><a href="~/@item.Slug">@item.Name</a></h3>
+            <h4 class="product-price">@String.Format("{0:0,0₫}", @item.ProPrice)<del class="product-old-price">@String.Format("{0:0,0₫}", @item.Price)</del></h4>
+            <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="product-btns">
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
+                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">So sánh</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Chi tiết</span></button>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="add-to-cart-btn">@*<i class="fa fa-shopping-cart"></i>*@ Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+    <!-- /product -->
+}

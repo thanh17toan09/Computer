@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ElectroShop.Models.MTopic>
+@{
+    ViewBag.Title = "Tất cả bài viết";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<style>
+    h2.center-title {
+        text-align: left;
+        position: unset;
+        margin-left: 0px;
+    }
+</style>
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        @foreach (var top in Model)
+        {
+            <!-- row -->
+            <div class="row">
+
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">@top.Name</h3>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab2" class="tab-pane fade in active">
+                                <div class="products-slick" data-nav="#slick-nav-2">
+                                    @Html.Action("PostHome", "Module", new { topid = top.Id })
+                                </div>
+                                <div id="slick-nav-2" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+
+
+

@@ -1,0 +1,127 @@
+﻿@model ElectroShop.Models.MTopic
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .input {
+        width: 556px;
+    }
+
+    .select {
+        width: 280px;
+    }
+</style>
+@Html.Partial("_MessageAlert")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3" id="sidebar">
+                <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                    <li class="active">
+                        <a href="@Url.Action("Create", "Topic")"><i class="icon-chevron-right"></i> Thêm mới</a>
+
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Index", "Topic")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                    </li>
+                    <li class="">
+
+                        <a href="@Url.Action("Trash", "Topic")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.demrac)</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="span9" id="content">
+                <div class="row-fluid">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <ul class="breadcrumb">
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <li>
+                                    <a href="#">Chủ đề bài viết</a>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- block -->
+                    <div class="block">
+
+                        <div class="block-content collapse in">
+                            <div class="span12">
+                                <div class="table-toolbar">
+                                    <div class="span10"></div>
+                                    <div class="span2">
+                                        <div class="btn-group">
+                                            <input type="submit" value="Tạo" class="btn btn-primary btn-sm fas fa-plus-circle" />
+                                            <a href="@Url.Action("Index","Topic")" class="btn btn-danger btn-sm"><i class="fas fa-arrow-circle-left"></i>Trở về</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-toolbar">
+                                    <div class="span8">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+
+                                            <label class="control-label col-md-2">Tên chủ đề</label>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", placeholder = "Ví dụ: Tin công nghệ" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Từ khóa SEO</label>
+                                            @Html.TextAreaFor(model => model.Metakey, new { @class = "input", placeholder = "Ví dụ: Tin công nghệ cực hot" })
+                                            @Html.ValidationMessageFor(model => model.Metakey, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">Mô tả SEO</label>
+                                            @Html.TextAreaFor(model => model.Metadesc, new { @class = "input", placeholder = "Ví dụ: Công nghệ là thế hệ của thế hệ 4.0" })
+                                            @Html.ValidationMessageFor(model => model.Metadesc, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="span4">
+                                        @*bên phải*@
+                                        <div class="form-group">
+                                            <label class="control-label col-md-10">Cấp cha</label>
+                                            @Html.DropDownListFor(model => model.ParentId, (SelectList)ViewBag.listTopic, "[Là cấp cha]", new { @class = "select" })
+                                            @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-10">Thứ tự hiển thị</label>
+                                            @Html.DropDownListFor(model => model.Orders, (SelectList)ViewBag.listOrder, new { @class = "select" })
+                                            @Html.ValidationMessageFor(model => model.Orders, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-10">Trạng thái</label>
+                                            @Html.DropDownListFor(model => model.Status, new[] { new SelectListItem { Value = "1", Text = "Hiển thị" }, new SelectListItem { Value = "2", Text = "Không hiển thị" } }, new { @class = "select" })
+                                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /block -->
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+}

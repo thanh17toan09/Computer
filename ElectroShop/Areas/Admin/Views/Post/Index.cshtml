@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ElectroShop.PostTopic>
+
+@{
+    ViewBag.Title = "Bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Partial("_MessageAlert")
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3" id="sidebar">
+            <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse">
+                <li class="">
+                    <a href="@Url.Action("Create","Post")"><i class="icon-chevron-right"></i> Thêm mới</a>
+
+                </li>
+                <li class="active">
+                    <a href="@Url.Action("Index","Post")"><i class="icon-chevron-right"></i> Danh sách</a>
+
+                </li>
+                <li class="">
+
+                    <a href="@Url.Action("Trash","Post")"><i class="icon-chevron-right"></i> Thùng rác(@ViewBag.demrac)</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="span9" id="content">
+            <div class="row-fluid">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="breadcrumb">
+                            <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
+                            <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                            <li>
+                                <a href="#">Bài viết</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- block -->
+                <div class="block">
+
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div class="table-toolbar">
+                                <div class="btn-group">
+
+                                </div>
+
+                            </div>
+
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example2">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Danh mục</th>
+                                        <th>Trạng thái</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                <tr>
+                                    <td class="text-center">@Html.DisplayFor(modelItem => item.PostId)</td>
+                                    <td><img src="~/Public/library/post/@Html.DisplayFor(modelItem => item.PostImg)" alt="Error" width="70" class="d-block m-auto" />  </td>
+                                    <td style="max-width:17rem"><a href="~/Admin/Post/Details/@item.PostId">@Html.DisplayFor(modelItem => item.PostName)</a>  </td>
+                                    <td>@Html.DisplayFor(modelItem => item.TopicName)</td>
+                                    <td>
+                                        <label class="switch">
+                                            @if (item.PostStatus == 1)
+                                            {<input class="changeStatus" data-id="@item.PostId" data-controller="Post" type="checkbox" checked>}
+                                            else
+                                            {<input class="changeStatus" data-id="@item.PostId" data-controller="Post" type="checkbox">}
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                    <td class="text-center">
+                                       
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa">
+                                            <a href="@Url.Action("Edit", "Post", new { id = item.PostId })" class="text-white"><i class="icon-edit"></i></a>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Xóa">
+                                            <a href="@Url.Action("DelTrash", "Post", new { id = item.PostId })" class="text-white"><i class="icon-trash"></i></a>
+                                        </button>
+                                    </td>
+                                </tr>}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /block -->
+            </div>
+        </div>
+    </div>
+    <hr>
+
+</div>
